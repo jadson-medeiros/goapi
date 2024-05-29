@@ -12,13 +12,12 @@ import (
 	entityPkg "github.com/jadson-medeiros/goapi/pkg/entity"
 )
 
-
 type ProductHandler struct {
 	ProductDB database.ProductInterface
 }
 
 func NewProductHandler(db database.ProductInterface) *ProductHandler {
-	return &ProductHandler{ProductDB: db,}
+	return &ProductHandler{ProductDB: db}
 }
 
 func (h *ProductHandler) CreateProduct(w http.ResponseWriter, r *http.Request) {
@@ -108,7 +107,7 @@ func (h *ProductHandler) UpdateProduct(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	
+
 	w.WriteHeader(http.StatusOK)
 }
 

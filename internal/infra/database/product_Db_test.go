@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func TestCreateNewProduct (t *testing.T) {
+func TestCreateNewProduct(t *testing.T) {
 	db, err := gorm.Open(sqlite.Open("file::memory"), &gorm.Config{})
 	if err != nil {
 		t.Error(err)
@@ -22,13 +22,12 @@ func TestCreateNewProduct (t *testing.T) {
 	assert.NotEqual(t, product.ID, "")
 }
 
-func TestFindAllProducts (t *testing.T) {
+func TestFindAllProducts(t *testing.T) {
 	db, err := gorm.Open(sqlite.Open("file::memory"), &gorm.Config{})
 	if err != nil {
 		t.Error(err)
 	}
 	db.AutoMigrate(&entity.Product{})
-
 	for i := 1; i < 24; i++ {
 		product, err := entity.NewProduct(fmt.Sprintf("Product %d", i), rand.Float64()*100)
 		assert.NoError(t, err)
@@ -98,7 +97,7 @@ func TestDeleteProduct(t *testing.T) {
 
 	err = productDB.Delete(product.ID.String())
 	assert.NoError(t, err)
-	
+
 	_, err = productDB.FindById(product.ID.String())
 	assert.Error(t, err)
 }
